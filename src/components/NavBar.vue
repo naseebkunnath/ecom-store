@@ -24,7 +24,7 @@
         </ul>
       </div>
       &nbsp;&nbsp;
-      <button class="btn btn-sm btn-success my-2 my-sm-0" type="button" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-primary">{{ cartTotalItems }}</span></button>
+      <router-link to="/cart/checkout" class="btn btn-sm btn-success my-2 my-sm-0" type="button" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-primary">{{ cartTotalItems }}</span></router-link>
     </div>
   </nav>
 </template>

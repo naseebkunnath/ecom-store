@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home.vue'
+import CartCheckout from '../components/CartCheckout.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/cart/checkout',
+    name: 'CartCheckout',
+    component: CartCheckout
   },
   /*{
     path: '/shop',
