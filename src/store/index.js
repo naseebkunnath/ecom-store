@@ -50,17 +50,39 @@ const store = new Vuex.Store({
                 price : 30,
                 description : "Neat, Sleek, Smart",
                 imageurl : "images/shirt.png"
-              }
+              },
+              {
+                id : 7,
+                title : "T Shirts",
+                price : 30,
+                description : "T Shirt",
+                imageurl : "images/shirt.png"
+              },
         ],
         cart : [],
         totalCount: 200
     },
     mutations: {
-        addCartItem(state, item){
-            item.quantity = 1;
-            state.cart.push(item);
+        addToCart(state, product){
+            let exist = state.cart.find((item) => {
+                return item.id == product.id;
+            });
+
+            if(exist) {
+                state.cart = state.cart.map((item) => {
+                    if(item.id == exist.id){
+                        exist.quantity++;
+                        console.log(exist);
+                        return exist;
+                    }
+                    return item;
+                }) 
+            } else {
+                state.cart.push({ ...product, quantity: 1 });
+            }
+            // console.log(state.cart);
         },
-        updateCartItem(state, updatedItem){
+        updateCart(state, updatedItem){
             state.cart = state.cart.map((cartItem) => {
                 if(cartItem.id == updatedItem.id){
                     return updatedItem;
