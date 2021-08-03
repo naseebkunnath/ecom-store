@@ -72,7 +72,6 @@ const store = new Vuex.Store({
                 state.cart = state.cart.map((item) => {
                     if(item.id == exist.id){
                         exist.quantity++;
-                        console.log(exist);
                         return exist;
                     }
                     return item;
@@ -80,24 +79,17 @@ const store = new Vuex.Store({
             } else {
                 state.cart.push({ ...product, quantity: 1 });
             }
-            // console.log(state.cart);
-        },
-        updateCart(state, updatedItem){
-            state.cart = state.cart.map((cartItem) => {
-                if(cartItem.id == updatedItem.id){
-                    return updatedItem;
-                }
-    
-                return cartItem;
-            })
         },
         removeCartItem(state, item){
             state.cart = state.cart.filter((cartItem) => {
                 return cartItem.id != item.id
             })
         },
-        incTotalCount(state) {
-            state.totalCount++;
+    },
+    getters: {
+        totalCartItems: (state) => {
+            console.log(state.cart);
+            return state.cart.length;
         }
     },
     plugins: [vuexPersist.plugin]

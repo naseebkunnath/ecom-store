@@ -1,8 +1,5 @@
 <template>
   <product-list :products="products" />
-
-  <p v-for="product in cart" :key="product.id">{{ product.title }}</p>
-
 </template>
 
 <script>
@@ -16,7 +13,7 @@ export default {
   },
   computed: {
     cartTotalItems() {
-      return this.$store.state.totalCount;
+      return this.$store.getters.totalCartItems;
     },
     products() {
       // return this.$store.state.products;
