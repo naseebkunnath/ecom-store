@@ -1,7 +1,7 @@
 <template>
   <div class="col-3 mt-3" v-bind:style="{ marginRight: '4px' }">
     <div class="card h-100 text-left">
-      <img class="w-100" :src="product.image" alt />
+      <img class="w-100" :src="product.imageUrl" alt />
       <div class="card-body">
         <h4 class="card-title">
           

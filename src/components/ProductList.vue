@@ -31,7 +31,6 @@ export default {
   methods: {
     async getProducts() {
       const { data } = await ProductService.getAll();
-      console.log(data);
       this.products = data;
     },
   }
