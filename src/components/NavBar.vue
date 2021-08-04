@@ -19,8 +19,9 @@
 
       <div class="form-inline my-2 my-lg-0">
         <ul class="navbar-nav mr-auto">
-          <router-link to="/" class="nav-link active">Login</router-link>
-          <router-link to="/" class="nav-link active">Register</router-link>
+          <router-link to="/login" class="nav-link active">Login</router-link>
+          <a @click="logout()" class="nav-link active">Logout</a>
+          <router-link to="/signup" class="nav-link active">Signup</router-link>
         </ul>
       </div>
       &nbsp;&nbsp;
@@ -31,12 +32,24 @@
 
 <script>
 
+import auth from '../services/authService';
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 export default {
   name: 'NavBar',
   computed: {
     cartTotalItems() {
       return this.$store.getters.totalCartItems;
     },
+  },
+  methods: {
+    logout() {
+      auth.logout();
+
+      toast.success("logged out successfully");
+      this.$router.push('/');
+    }
   }
 }
 

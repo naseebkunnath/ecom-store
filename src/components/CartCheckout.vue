@@ -115,7 +115,7 @@ export default {
       // console.log(JSON.stringify(order));
 
       try {
-        await OrderService.addNew(order);
+        await OrderService.create(order);
 
         this.$store.commit('clearCart');
 

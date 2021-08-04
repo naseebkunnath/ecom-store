@@ -9,6 +9,7 @@ const vuexPersist = new VuexPersist({
 const store = new Vuex.Store({
     state: {
         cart : [],
+        token: ''
     },
     mutations: {
         addToCart(state, product){
@@ -35,6 +36,12 @@ const store = new Vuex.Store({
         },
         clearCart(state) {
             state.cart = [];
+        },
+        setToken(state, token) {
+            state.token = token;
+        },
+        removeToken(state) {
+            state.token = '';
         }
     },
     getters: {
@@ -50,7 +57,10 @@ const store = new Vuex.Store({
             }); 
 
             return totalPrice;
-        }
+        },
+        token: (state) => {
+            return state.token;
+        },
     },
     plugins: [vuexPersist.plugin]
 });

@@ -1,7 +1,7 @@
 import http from "./http";
 
 class OrderService {
-  addNew(data) {
+  create(data) {
     return http.post("/orders", data);
   }
 }
