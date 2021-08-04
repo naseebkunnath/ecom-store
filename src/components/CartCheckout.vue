@@ -70,7 +70,7 @@ import Joi from 'joi';
 import { useToast } from "vue-toastification";
 const toast = useToast();
 import CartItem from './CartItem';
-// import OrderService from "../services/OrderService";
+import OrderService from "../services/OrderService";
 
 export default {
   name: "CartCheckout",
@@ -112,25 +112,19 @@ export default {
         items: this.cartItems
       };
 
-      console.log(order);
+      // console.log(JSON.stringify(order));
 
-      /*try {
-        await ProductService.create({
-          title: this.title,
-          description: this.description,
-          price: this.price
-        });
+      try {
+        await OrderService.addNew(order);
 
-        toast.success("Product added successfully");
-        this.$router.push('/products');
+        this.$store.commit('clearCart');
+
+        toast.success("New order added successfully");
+        this.$router.push('/');
 
       } catch (error) {
-        if (error.response && error.response.status === 400) {
-          if(error.response.data.code && error.response.data.code == 'E_MISSING_OR_INVALID_PARAMS') {
-            toast.error("Invalid Input");
-          }
-        }
-      }*/
+        console.log(error)
+      }
     },
   },
   computed: {

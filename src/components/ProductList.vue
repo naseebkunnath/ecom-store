@@ -8,21 +8,32 @@
 
 import ProductCard from "./ProductCard.vue";
 
+import ProductService from "../services/ProductService";
+
 export default {
-  name: 'Home',
-  props: [ 'products' ],
+  name: 'ProductList',
   components: {
     ProductCard
+  },
+  data() {
+    return {
+      products: []
+    }
   },
   computed: {
     cartTotalItems() {
       return this.$store.state.totalCount;
     },
   },
+  mounted() {
+    this.getProducts()
+  },
   methods: {
-    incTotalCount() {
-      this.$store.commit("incTotalCount");
-    }
+    async getProducts() {
+      const { data } = await ProductService.getAll();
+      console.log(data);
+      this.products = data;
+    },
   }
 }
 
