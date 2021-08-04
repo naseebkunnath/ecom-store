@@ -60,7 +60,6 @@ const store = new Vuex.Store({
               },
         ],
         cart : [],
-        totalCount: 200
     },
     mutations: {
         addToCart(state, product){
@@ -88,8 +87,17 @@ const store = new Vuex.Store({
     },
     getters: {
         totalCartItems: (state) => {
-            console.log(state.cart);
             return state.cart.length;
+        },
+        cartTotalPrice: (state) => {
+            let totalPrice = 0;
+
+            state.cart.forEach(function(item) {
+                console.log(item);
+                totalPrice += item.price * item.quantity;
+            }); 
+
+            return totalPrice;
         }
     },
     plugins: [vuexPersist.plugin]
