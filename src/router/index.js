@@ -1,11 +1,11 @@
 import _ from 'underscore';
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store';
+
 import Home from '../components/Home.vue'
 import CartCheckout from '../components/CartCheckout.vue'
 import CreateCustomer from '../components/CreateCustomer.vue'
 import CustomerLogin from '../components/CustomerLogin.vue'
-
-import auth from '../services/authService';
 
 const routes = [
   {
@@ -39,10 +39,12 @@ router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/login', '/signup'];
 
-  console.log(to.path, publicPages);
+  if(!_.contains(publicPages, to.path) && !store.getters.authUser) {
+    return next('/login');
+  }
 
-  if(!_.contains(publicPages, to.path) && !auth.getCurrentUser()) {
-    return next('/signup');
+  if(_.contains(publicPages, to.path) && store.getters.authUser) {
+    return next('/');
   }
 
   next();

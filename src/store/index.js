@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist'
+import jwtDecode from "jwt-decode";
 
 const vuexPersist = new VuexPersist({
     key: 'ecom-store',
@@ -61,6 +62,14 @@ const store = new Vuex.Store({
         token: (state) => {
             return state.token;
         },
+        authUser: state => {
+            try {
+              const token = state.token;
+              return jwtDecode(token);
+            } catch (error) {
+              return null;
+            }
+        }
     },
     plugins: [vuexPersist.plugin]
 });

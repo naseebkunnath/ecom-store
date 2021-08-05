@@ -4,7 +4,7 @@
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
-            <form>
+            <form v-on:submit.prevent="onSubmit">
                 <div class="form-group">
                     <label>Email</label>
                     <input v-model="email" type="text" class="form-control" placeholder="Enter Email">
@@ -14,6 +14,12 @@
                     <input v-model="password" type="password" class="form-control" placeholder="Enter Password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                <div>
+                  <div class="d-flex justify-content-center links mt-3">
+                    Don't have an account?&nbsp;&nbsp;<router-link to="/signup">Sign Up</router-link>
+                  </div>
+                </div>
+            
             </form>
           </div>
         </div>
@@ -46,14 +52,19 @@ export default {
       });
 
       try {
-        let data = await schema.validateAsync(_.pick(this, [ 'email', 'password' ]));
-        auth.login(data.email, data.password);
-
-        toast.success("logged in successfully");
-        this.$router.push('/');
+        var input = await schema.validateAsync(_.pick(this, [ 'email', 'password' ]));
       }
       catch (err) {
         return toast.error(err.details[0].message);
+      }
+
+      var response = await auth.login(input.email, input.password);
+      
+      if(response === true) {
+        toast.success("logged in successfully");
+        this.$router.push('/');
+      } else {
+        return toast.error('Invalid email or password');
       }
     }
   }

@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="card-body">
+      <h5 class="card-title text-center mb-5 fw-light fs-5" data-v-2de09eaa="">Sign Up</h5>
       <form v-on:submit.prevent="onSubmit">
         <div class="form-group">
           <label>Name</label>

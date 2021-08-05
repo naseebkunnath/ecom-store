@@ -1,14 +1,21 @@
-import http from './http';
 import jwtDecode from "jwt-decode";
+
 import store from '../store';
+import http from './http';
 
 setTimeout(() => {  
   http.setJWT(getJWT());
 }, 1000);
 
 export async function login(email, password) {
-  const { data: token } = await http.post('/customers/login', { email, password });
-  store.commit("setToken", token);
+  try {  
+    const { data: token } = await http.post('/customers/login', { email, password });
+    store.commit("setToken", token);
+    return true;
+  }
+  catch (err) {
+    return err.response;
+  }
 }
 
 export function loginWithJWT(token) {
