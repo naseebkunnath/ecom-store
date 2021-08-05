@@ -17,9 +17,9 @@
         </li>
       </ul>
 
-      <router-link to="/login" class="color-white" v-if="!authUser">Login</router-link>
+      <router-link to="/login" class="color-white" v-if="!authUser">Login</router-link>&nbsp;&nbsp;
       
-      <router-link to="/cart/checkout" class="btn btn-sm btn-success my-2 my-sm-0" type="button" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-primary">{{ cartTotalItems }}</span></router-link>
+      <router-link to="/cart/checkout" class="btn btn-sm btn-light my-2 my-sm-0" type="button" title="Checkout"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-info">{{ cartTotalItems }}</span></router-link>
       &nbsp;&nbsp;
       <div class="form-inline my-2 my-lg-0">
         <ul class="navbar-nav mr-auto" v-if="authUser">

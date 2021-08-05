@@ -6,6 +6,11 @@ class OrderService {
     http.setJWT(store.getters.token);
     return http.post("/orders", data);
   }
+
+  getOne(id) {
+    http.setJWT(store.getters.token);
+    return http.get("/orders/" + id);
+  }
 }
 
 export default new OrderService();

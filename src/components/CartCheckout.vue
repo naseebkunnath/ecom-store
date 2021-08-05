@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-muted">Your cart</span>
+              <span>Your cart</span>
               <span class="badge badge-info badge-pill">{{ cartTotalItems }}</span>
             </h4>
             <ul class="list-group mb-3">
@@ -44,14 +44,25 @@
                 </div>
               </div>
 
-              <div class="mb-3">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  v-model="shippingAddress.email"
-                  class="form-control"
-                  placeholder="Enter  Email"
-                />
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    v-model="shippingAddress.email"
+                    class="form-control"
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="phone">Phone</label>
+                  <input
+                    type="text"
+                    v-model="shippingAddress.phone"
+                    class="form-control"
+                    placeholder="Enter Phone"
+                  />
+                </div>
               </div>
 
               <div class="mb-3">
@@ -88,6 +99,19 @@
 
               <h4 class="mb-3">Payment</h4>
 
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="cod"
+                    v-model="paymentMethod"
+                    checked
+                  />
+                  <label class="form-check-label">Cash On Delivery</label>
+                </div>
+              </div>
+
               <hr class="mb-4" />
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
             </form>
@@ -115,11 +139,13 @@ export default {
       shippingAddress: {
         firstName: "NASEEB",
         lastName: "RAHMAN",
-        email: "naseeb@test.mail",
-        address: "test address",
-        region: "test region",
-        zipCode: "545454"
-      }
+        email: "naseeb@test.test",
+        phone: "55454",
+        address: "545454",
+        region: "hggjhg",
+        zipCode: "5454"
+      },
+      paymentMethod: 'cod'
     };
   },
   methods: {
@@ -137,6 +163,10 @@ export default {
           .min(3)
           .max(128)
           .required(),
+        phone: Joi.string()
+          .min(5)
+          .max(16)
+          .required(),
         address: Joi.string()
           .min(6)
           .max(128)
@@ -145,7 +175,7 @@ export default {
           .min(3)
           .max(50)
           .required(),
-        zipCode: Joi.number().required()
+        zipCode: Joi.number().required(),
       });
 
       try {
@@ -156,18 +186,21 @@ export default {
 
       let order = {
         shippingAddress: this.shippingAddress,
-        items: this.cartItems
+        items: this.cartItems,
+        paymentMethod: this.paymentMethod
       };
 
       // console.log(JSON.stringify(order));
 
       try {
-        await OrderService.create(order);
+        var { data: createdOrder } = await OrderService.create(order);
+
+        console.log(createdOrder);
 
         this.$store.commit("clearCart");
 
         toast.success("New order added successfully");
-        this.$router.push("/");
+        this.$router.push(`/orders/${createdOrder.id}`);
       } catch (error) {
         console.log(error);
       }

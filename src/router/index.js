@@ -5,9 +5,10 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 
 import Home from '../components/Home.vue'
-import CartCheckout from '../components/CartCheckout.vue'
 import CreateCustomer from '../components/CreateCustomer.vue'
 import CustomerLogin from '../components/CustomerLogin.vue'
+import CartCheckout from '../components/CartCheckout.vue'
+import OrderDetails from '../components/OrderDetails.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     name: 'CustomerLogin',
     component: CustomerLogin
   },
+  { 
+    path: '/orders/:id',
+    name: 'OrderDetails',
+    component: OrderDetails 
+  }
 ]
 
 const router = createRouter({
