@@ -2,7 +2,7 @@
   <div>
     <nav-bar :authUser="authUser"/>
     <router-view />
-    </div>
+  </div>
 </template>
 
 <script>
@@ -21,3 +21,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .nav-link, .color-white {
+    color:white;
+  }
+</style>

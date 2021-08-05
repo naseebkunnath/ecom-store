@@ -11,7 +11,13 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navb">
-      <ul class="navbar-nav mr-auto"></ul>
+      <ul class="navbar-nav mr-auto">
+        <li>
+          
+        </li>
+      </ul>
+
+      <router-link to="/login" class="color-white" v-if="!authUser">Login</router-link>
       
       <router-link to="/cart/checkout" class="btn btn-sm btn-success my-2 my-sm-0" type="button" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-primary">{{ cartTotalItems }}</span></router-link>
       &nbsp;&nbsp;
@@ -46,7 +52,7 @@ export default {
       auth.logout();
 
       toast.success("logged out successfully");
-      this.$router.push('/login');
+      this.$router.push('/');
     }
   }
 }
@@ -54,8 +60,7 @@ export default {
 </script>
 
 <style scoped>
-  .user-display {
-    padding: 10px;
-    font-size: 1em
+  .nav-link, .color-white {
+    color:white;
   }
 </style>

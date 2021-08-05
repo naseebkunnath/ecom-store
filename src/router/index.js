@@ -1,6 +1,8 @@
 import _ from 'underscore';
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store';
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 import Home from '../components/Home.vue'
 import CartCheckout from '../components/CartCheckout.vue'
@@ -40,12 +42,17 @@ router.beforeEach((to, from, next) => {
   const publicPages = [ '/', '/login', '/signup'];
 
   if(!_.contains(publicPages, to.path) && !store.getters.authUser) {
+    if(to.path == '/cart/checkout') {
+      toast.info('Please login to your account');
+    }
     return next('/login');
   }
 
-  /*if(_.contains(publicPages, to.path) && store.getters.authUser) {
-    return next('/');
-  }*/
+  if(_.contains(publicPages, to.path) && store.getters.authUser) {
+    if(to.path != '/') {
+      return next('/');
+    }
+  }
 
   next();
 })

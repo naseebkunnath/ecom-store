@@ -24,6 +24,10 @@
 </template>
 
 <script>
+
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 export default {
   name: "ProductCard",
   props: {
@@ -32,6 +36,7 @@ export default {
   methods: {
     addToCart() {
       this.$store.commit("addToCart", this.product);
+      toast.success('Item added to the cart');
     }
   }
 };
