@@ -2,7 +2,7 @@ import axios from "axios";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
-axios.defaults.baseURL = 'http://localhost:1337/api/v1/ecommerce/'; //process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.ECOM_BACK_API_URL;
 
 axios.interceptors.response.use(null, error => {
   const expectedError =
