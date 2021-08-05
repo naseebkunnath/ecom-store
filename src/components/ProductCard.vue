@@ -13,7 +13,7 @@
               <div class="bbb_deals_item_price ml-auto">₹{{ product.price }}</div>
             </div>
             <div :style="{ marginTop: '25px' }">
-              <button class="btn btn-outline-primary btn-block btn-sm" @click="addToCart()">Add to Cart</button>
+              <button class="btn btn-primary btn-block btn-sm" @click="addToCart()">Add to Cart</button>
             </div>
 
           </div>
