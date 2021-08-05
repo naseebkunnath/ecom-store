@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar v-if="authUser"/>
+    <nav-bar :authUser="authUser"/>
     <router-view />
     </div>
 </template>

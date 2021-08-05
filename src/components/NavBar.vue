@@ -16,8 +16,9 @@
       <router-link to="/cart/checkout" class="btn btn-sm btn-success my-2 my-sm-0" type="button" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<span class="badge badge-pill badge-primary">{{ cartTotalItems }}</span></router-link>
       &nbsp;&nbsp;
       <div class="form-inline my-2 my-lg-0">
-        <ul class="navbar-nav mr-auto">
-          <a @click="logout()" class="nav-link active" title="Logout"><i class="fa fa-sign-out"></i></a>
+        <ul class="navbar-nav mr-auto" v-if="authUser">
+          <span class="btn btn-md btn-link">{{ authUser.name }}({{ authUser.email }})</span>
+          <a @click="logout()" class="btn btn-md btn-link nav-link" title="Logout"><i class="fa fa-sign-out"></i></a>
         </ul>
       </div>
     </div>
@@ -32,6 +33,9 @@ const toast = useToast();
 
 export default {
   name: 'NavBar',
+  props: {
+    authUser: Object
+  },
   computed: {
     cartTotalItems() {
       return this.$store.getters.totalCartItems;
@@ -48,3 +52,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .user-display {
+    padding: 10px;
+    font-size: 1em
+  }
+</style>
